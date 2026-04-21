@@ -145,7 +145,7 @@ For each selected problem, the application prints intermediate details (where ap
 gcc -std=c11 -Wall -Wextra -pedantic main.c heap_range.c line_intersection.c msis_dp.c utils.c -o daa_project
 ```
 
-### Run
+### Run (CLI)
 
 Linux/macOS:
 
@@ -158,6 +158,31 @@ Windows PowerShell:
 ```powershell
 .\daa_project.exe
 ```
+
+### Web Interface Setup (New!)
+
+To experience the algorithms through an interactive, modern web visualization instead of the command line:
+
+1. **Install Node.js**: Ensure Node.js and npm are installed on your machine.
+2. **Start the Backend**:
+   Open a terminal, navigate to the `backend` folder, install dependencies, and run the server:
+   ```bash
+   cd backend
+   npm install
+   node server.js
+   ```
+   *(The backend server will run on port 3001 and interact directly with `daa_project.exe`.)*
+
+3. **Start the Frontend**:
+   Open a second terminal, navigate to the `frontend` folder, install dependencies, and start the Vite dev server:
+   ```bash
+   cd frontend
+   npm install
+   npm run dev
+   ```
+
+4. **Open the App**:
+   Visit [http://localhost:5173](http://localhost:5173) in your browser. You can enter your array inputs dynamically and the UI will intelligently extract and highlight the final answers while also showing the raw C program output!
 
 ## Demo Flow (Recommended for Presentation)
 
