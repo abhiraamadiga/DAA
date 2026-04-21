@@ -170,6 +170,82 @@ Windows PowerShell:
 7. Explain DP table concept and reconstructed subsequence.
 8. Choose option 4 to exit.
 
+## Demo Walkthrough (Problem -> Solution -> How Solution Came)
+
+Use this section while presenting. You can read it directly in viva/demo format.
+
+### Demo 1: Smallest Range from k Sorted Arrays
+
+Problem:
+We are given k sorted arrays. We must find the smallest interval [L, R] such that at least one element from every array lies inside this interval.
+
+Solution:
+Use a min-heap to track one current element from each array, and maintain the current maximum among them.
+
+How the solution came:
+1. If we pick one element from each array, those k elements define a range from minimum to maximum.
+2. To make the range smaller, we should move forward from the current minimum element, because increasing minimum can shrink width.
+3. A min-heap gives that minimum quickly each time.
+4. After popping that minimum, we push the next element from the same array, so coverage from all arrays is preserved.
+5. We keep updating the best range seen so far.
+6. When one array is exhausted, we cannot maintain coverage from all arrays, so we stop.
+
+Why this is correct intuitively:
+At every step, the only useful move is to advance the array that currently contributes the minimum boundary.
+
+---
+
+### Demo 2: Line Segment Intersections
+
+Problem:
+Given horizontal and vertical line segments, count how many intersections occur.
+
+Solution:
+Use sweep line with events sorted by x-coordinate and maintain active horizontal y-values.
+
+How the solution came:
+1. Naive method checks every horizontal with every vertical, which is too slow for larger inputs.
+2. Instead, sweep from left to right on x-axis and process only relevant segments.
+3. For each horizontal segment, create START(x1) and END(x2) events.
+4. For each vertical segment, create a VERTICAL query event at x.
+5. Maintain all currently active horizontal y-values in sorted order.
+6. On a VERTICAL event, count active y-values in [y1, y2] using binary search.
+7. Add those counts to total intersections.
+
+Why this is correct intuitively:
+At position x, only horizontals that have started and not ended can intersect a vertical at that x. So active set + range query is exactly what we need.
+
+---
+
+### Demo 3: Maximum Sum Increasing Subsequence (MSIS)
+
+Problem:
+Find an increasing subsequence with maximum possible sum.
+
+Solution:
+Use dynamic programming and parent links.
+
+How the solution came:
+1. For each index i, define dp[i] as best sum of an increasing subsequence ending at i.
+2. Initially dp[i] = arr[i] (subsequence containing only that element).
+3. For each pair j < i, if arr[j] < arr[i], then arr[i] can extend subsequence ending at j.
+4. So candidate sum is dp[j] + arr[i]. Keep the maximum.
+5. Track parent[i] = j whenever dp[i] improves.
+6. After filling DP, the maximum dp[i] is answer sum.
+7. Follow parent links backward to reconstruct actual subsequence.
+
+Why this is correct intuitively:
+Every increasing subsequence ending at i must come from some earlier valid j. DP evaluates all such j and stores the best one.
+
+## Quick Viva Script (30-45 seconds each)
+
+1. Problem statement in one line.
+2. Why naive is expensive.
+3. Data structure/paradigm used.
+4. Core idea in 4-6 steps.
+5. Time and space complexity.
+6. One-line correctness intuition.
+
 ## Educational Value
 
 This project demonstrates key DAA learning outcomes:
